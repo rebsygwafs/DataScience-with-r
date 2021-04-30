@@ -1,0 +1,78 @@
+---
+title: "project"
+author: "pash"
+date: "4/24/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(haven)
+dt <- read_sas("C:/Users/user/Downloads/Project (1)/Project/ps2.sas7bdat")
+
+dt[sapply(dt, is.character)] <- lapply(dt[sapply(dt, is.character)], as.factor)
+dt
+```
+```{r}
+library(caret)
+## Cross Validation
+cv.ctrl <- trainControl(method = "repeatedcv", repeats = 3,number = 4)
+```
+```{r}
+## Split Data into Train and Test
+set.seed(1005)
+split <- sample(seq_len(nrow(dt)),   size = floor(0.80 * nrow(dt)))
+
+train_1<- dt[split, ]
+test_1<- dt[-split, ]
+dim(train_1);dim(test_1)
+```
+
+```{r}
+## Logistic Regression
+
+logis<- train(form=y~., data=train_1,method="glm", family="binomial",trControl=cv.ctrl)
+predlog<-predict(logis,test_1,type="raw")
+confusionMatrix(predlog, test_1$y)
+```
+
+our result shows that accuracy level is 81% and confidence level predicts a value range of 95%.
+
+```{r}
+summary(logis)
+```
+
+
+```{r}
+logis_2<- train(form=y~job+marital +education +balance+housing+loan, data=train_1,method="glm", family="binomial",trControl=cv.ctrl)
+predict_logis_2<-predict(logis_2,test_1,type="raw")  
+confusionMatrix(predict_logis_2, test_1$y) 
+
+
+```
+## predicting the possible outcome of the newdata set
+```{r}
+summary(logis_2)
+```
+```{r}
+new_dt<-read_sas(file.choose())
+new_dt[sapply(new_dt, is.character)] <- lapply(new_dt[sapply(new_dt, is.character)], as.factor)
+new_dt
+
+```
+```{r} 
+##pedicting with the new data
+predict_new<-predict(logis_2, newdata = new_dt, type = "raw")
+predict_new[1:10]
+
+```
+
+
+```{r}
+ ##adding the new predicted values to the new data set
+new_dt$predcited_values<-predict_new
+new_dt[1:10]
+```
+

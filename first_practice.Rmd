@@ -1,0 +1,57 @@
+---
+title: "section one"
+author: "pash"
+date: "9/10/2020"
+output: pdf_document
+---
+
+
+```{r}
+
+
+
+Age<-c(30,90,60)
+Age
+length(Age)
+names(Age)<-c("James","John","Smith")
+names(Age)
+```
+
+
+```(r)
+
+d<-c(T,"a")
+d
+
+f<-c(FALSE,2)
+f
+```
+```{r}
+
+x<-(1:4)
+y<-(5:8)
+m<-cbind(x,y)
+q<-rbind(x,y)
+
+colnames(q)<-c("a","b","c","d")
+rownames(m)<-c("e","f","g","h")
+m
+q
+
+```
+```{r}
+ch<-data.frame(Age=c(30,20,30,40),Height=c(21,22,41,30),Income=c(21,22,33,41),Gender=c("F","F","M","F"))
+ch
+
+```
+```{r}
+Y<- matrix(1:16, nrow = 4, ncol = 4)
+colnames(Y)<-c("a","b","c","d")
+rownames(Y)<-c("p","r","s","t")
+Y
+Y [5] 
+Y[1:3, 3:4]
+Y[4,3]
+
+```
+

@@ -1,0 +1,87 @@
+---
+title: "Project"
+author: "pash"
+date: "9/30/2020"
+output: html_document
+---
+
+PROJECT
+Patience
+02/10/2020
+                             INTRODUCTION
+
+TOPIC:Linear Regression Analysis to determine the dependency of  Total Compensation on Salaries.
+This will help identify the significate relationship  between the dependent and independent variables.
+
+                           PROBLEM STATEMENT
+                           
+Developing analysis to predict and explain Total compensation on Salaries.
+
+                            
+DATA SOURCE:data.world 
+salary and benefits paid to City employees for (a year as reckoned for taxing or accounting purposes)fiscal year.
+where y= Total Compensation, x=Salaries.
+
+```{r}
+dt<-read.csv("Employee_Compensation_Sf.csv",header =T)
+dt
+```
+
+```{r}
+dt<-na.omit(dt)
+dt
+```
+
+```{r}
+library(ggplot2)
+ggplot(dt,aes(x=Salaries,y=Total.Compensation)) + geom_point()+ geom_smooth(method = "lm")+labs(title = "Relationship between Salaries and Total.Compensation")
+```
+# The relationship between the Total.Compensation  and Salaries is a very strong positive relationship.
+
+```{r}
+mod1<-lm(Total.Compensation~Salaries, data= dt)
+summary(mod1)
+```
+# the output indicates that the linear regression equation is
+ y = 4.601e+03 + 1.476e+00(Salaries)
+ 
+# the p-value 2.2e-16 indicates that Salaries have significance over Total.compensation
+# for the slope, for every increase in unit Salaries, the Total.Compensation increases by 1.476e+00.
+# Adjusted R_squared value which is 0.946, means that 94.6% of the total variation in Total.Compensation can be explained by the independent variable Salaries.
+
+```{r}
+head(mod1$residuals)
+```
+```{r}
+dt$residuals<-mod1$residuals
+head(dt$residuals)
+```
+
+```{r}
+library(ggplot2)
+ggplot(dt,aes(x=residuals)) + geom_histogram()
+
+```
+```{r}
+par(mfrow=c(2,2))
+plot(mod1)
+ggplot(dt,aes(x=residuals)) + geom_histogram()
+```
+# The assumption of the normality of residuals has been voilated.
+# the constant variable assumption is not met  cause there is pattern of points in the Residuals and Fitted plot.
+
+CONCLUSION:
+
+
+
+                            
+
+
+
+
+
+
+
+
+
+          

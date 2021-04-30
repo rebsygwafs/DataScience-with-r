@@ -1,0 +1,69 @@
+---
+title: "home work"
+author: "pash"
+date: "9/13/2020"
+output: html_document
+---
+
+```{r}
+X<-c(1:4)
+Y<-c(5:8)
+M<-cbind(X,Y)
+colnames(M)<-c("a","b")
+rownames(M)<-c("c","d","e","f")
+M
+```
+```{r}
+X<-c(1:4)
+Y<-c(5:8)
+Q<-rbind(X,Y)
+rownames(Q)<-c("a","b")
+colnames(Q)<-c("c","d","e","f")
+Q
+```
+
+```{r}
+M<-list(a=TRUE,b="AGE",c=1 + 4i,d=12,e="color")
+M
+
+```
+```{r}
+X<-factor(c("female","female","male","female","male"))
+X
+table(X)
+class(X)
+```
+```{r}
+X<-c("a","b","c","d","e","f","g","h")
+Y<-c(1:8)
+h<-c("age","color","text","name","num","size","length","height")
+dim(h)<-c(2,4)
+Q<-list(X,Y,h)
+F<-data.frame(num = 1:4,log = c(T,F,F,T))
+d<-(F)
+d
+```
+
+```{r}
+x<-c(3,2,7,4,5,6)
+x[x>6]
+```
+```{r}
+x<-matrix(1:6,2,3)
+x
+x[,2, drop = FALSE]
+```
+```{r}
+v<-matrix(1:12,3,4)
+v
+v[2:3,2:4]
+```
+```{r}
+Y<-matrix(1:16,nrow = 4,ncol = 4)
+colnames(Y)<-c("a","b","c","d")
+rownames(Y)<-c("e","f","g","h")
+Y
+Y[1,2]
+Y[3:4,1:3]
+```
+

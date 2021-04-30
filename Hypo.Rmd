@@ -1,0 +1,23 @@
+---
+title: "Hypothesis"
+author: "pash"
+date: "9/18/2020"
+output: pdf_document
+---
+
+```{r}
+dt<-read.csv("AdescoGym.csv",header=TRUE)
+dt
+```
+```{r}
+t.test(dt$Income,mu=30000,alternative="greater")
+```
+# the p-value is less than 0.05 we reject the null hypothesis and say the alternatuve hypothesis is true.We conclude that the mean income is greater than 3000.
+
+```{r}
+t.test(dt$Age,mu=20,alternative="greater")
+```
+# the p-value is less than 0.05 we reject the null hypothesis and say the alternatuve hypothesis is true.We conclude that the mean age is greater than 20.
+
+
+
